@@ -26,7 +26,6 @@ object Main {
     val question = scala.io.StdIn.readLine();
 
     if("y".equals(question)) {
-      game.restart;
       main(args);
     }
   }

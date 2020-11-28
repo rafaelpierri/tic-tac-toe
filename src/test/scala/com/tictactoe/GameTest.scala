@@ -86,14 +86,6 @@ class GameTest extends AnyFlatSpec with should.Matchers {
     game.getResult should be (Draw);
   }
 
-  "restart" should "start the game over" in {
-    val game = new Game();
-    game.registerMove(0, 0);
-    game.restart;
-
-    game.getCurrentPlayer should be (Game.X);
-  }
-
   "getGrid" should "present a matrix with all positions" in {
     val game = new Game();
     game.registerMove(0, 0);

@@ -10,12 +10,10 @@ object Draw extends Result;
 
 class Game {
   val gridLength = 3;
-  private var analysers: Map[Player, MoveAnalyser] = _;
-  private var currentPlayer: Player = _;
-  private var moveCount: Int = _;
-  private var grid: Map[Move, Player] = _;
-
-  startGame;
+  private var analysers: Map[Player, MoveAnalyser] = Map[Player, MoveAnalyser](Game.X -> MoveAnalyser(gridLength), Game.O -> MoveAnalyser(gridLength));
+  private var currentPlayer: Player = Game.X;
+  private var moveCount: Int = 0;
+  private var grid: Map[Move, Player] = Map[Move, Player]();
 
   def registerMove(row: Int, column: Int): Unit = {
     val move = Move(row, column);
@@ -34,8 +32,6 @@ class Game {
 
   def getResult: Result = analysers.find(tuple => tuple._2.lineHasBeenFilled).map(tuple => Winner(tuple._1)).getOrElse(Draw);
 
-  def restart: Unit = { startGame };
-
   def getGrid: Array[Array[Position]] = {
     val grid: Array[Array[Position]] = Array.ofDim[Position](gridLength, gridLength);
     for {
@@ -43,13 +39,6 @@ class Game {
       column <- 0 until gridLength
     } if (this.grid.contains(Move(row, column))) grid(row)(column) = this.grid(Move(row, column)) else grid(row)(column) = Empty;
     grid;
-  }
-
-  private def startGame: Unit = {
-    analysers = Map[Player, MoveAnalyser](Game.X -> MoveAnalyser(gridLength), Game.O -> MoveAnalyser(gridLength));
-    currentPlayer = Game.X;
-    moveCount = 0;
-    grid = Map[Move, Player]();
   }
 
   private def isMoveTaken(move: Move): Boolean = grid.contains(move);
