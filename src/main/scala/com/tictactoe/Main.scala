@@ -23,9 +23,9 @@ object Main {
     println();
     println("Play again? (y/n)");
 
-    val question = scala.io.StdIn.readLine();
+    val answer = scala.io.StdIn.readLine();
 
-    if("y".equals(question)) {
+    if("y".equals(answer)) {
       main(args);
     }
   }
