@@ -27,13 +27,13 @@ case class MoveAnalyser(gridLength: Int,
 
 object MoveAnalyser {
   def apply(gridLength: Int): MoveAnalyser =
-    MoveAnalyser(gridLength, build(gridLength), build(gridLength), 0, 0);
+    MoveAnalyser(gridLength, buildCounter(gridLength), buildCounter(gridLength), 0, 0);
 
-  def build(gridLength: Int): Map[Int, Int] = {
+  private def buildCounter(gridLength: Int, counter: Map[Int, Int] = Map()): Map[Int, Int] = {
     if (gridLength - 1 == 0) {
-      return Map(0 -> 0);
+      return Map(0 -> 0) ++ counter;
     }
 
-    Map(gridLength - 1 -> 0) ++ build(gridLength - 1);
+    buildCounter(gridLength - 1, counter ++ Map(gridLength - 1 -> 0)) ;
   }
 }
