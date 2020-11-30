@@ -19,8 +19,8 @@ case class MoveAnalyser(gridLength: Int,
   def lineHasBeenFilled: Boolean = {
     if (rowUsageCount.values.exists(count => count == gridLength)) return true;
     if (columnUsageCount.values.exists(count => count == gridLength)) return true;
-    if (diagonalCount == 3) return true;
-    if (inverseDiagonalCount == 3) return true;
+    if (diagonalCount == gridLength) return true;
+    if (inverseDiagonalCount == gridLength) return true;
     false;
   }
 }
