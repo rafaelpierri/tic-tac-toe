@@ -7,8 +7,8 @@ object Main {
     while(game.hasNotEnded) {
       println(s"Player ${game.getCurrentPlayer.symbol}, make a move (e. g.: 0 - enter - 0 - enter)");
 
-      val row = scala.io.StdIn.readInt();
-      val column = scala.io.StdIn.readInt();
+      val row = readInt;
+      val column = readInt;
 
       game.registerMove(row, column);
 
@@ -27,6 +27,22 @@ object Main {
 
     if("y".equals(answer)) {
       main(args);
+    }
+  }
+
+  def readInt: Int = {
+    var option: Option[Int] = Option.empty[Int];
+
+    try {
+      option = Option(scala.io.StdIn.readInt());
+    } catch {
+      case _: NumberFormatException => println("Please, provide an integer");
+      case e: Exception => println(e);
+    }
+
+    option match {
+      case Some(result) => result;
+      case None => readInt;
     }
   }
 
