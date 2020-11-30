@@ -43,7 +43,11 @@ class Game {
 
   private def isMoveTaken(move: Move): Boolean = grid.contains(move);
 
-  private def isMoveInvalid(move: Move): Boolean = move.row >= gridLength || move.column >= gridLength;
+  private def isMoveInvalid(move: Move): Boolean =
+    move.row >= gridLength ||
+    move.column >= gridLength ||
+    move.row < 0 ||
+    move.column < 0;
 
   private def toggleCurrentPlayer(): Unit = if (currentPlayer == Game.X) currentPlayer = Game.O else currentPlayer = Game.X;
 

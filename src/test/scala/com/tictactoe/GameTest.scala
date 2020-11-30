@@ -59,6 +59,14 @@ class GameTest extends AnyFlatSpec with should.Matchers {
     game.getCurrentPlayer should be (Game.X)
   }
 
+  it should "keep current player if row or column is less than 0" in {
+    val game = new Game();
+    game.registerMove(-1, -1);
+    game.registerMove(-1, -1);
+
+    game.getCurrentPlayer should be (Game.X)
+  }
+
   "getResult" should "display draw when match has not ended" in {
     val game = new Game();
 
